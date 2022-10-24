@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-conten padding-y bg">
+    {% include 'includes/alerts.html' %}
+    <div class="container">
+        <div class="row">
+        <aside class="col-md-3">
+            <!--   SIDEBAR   -->
+            <ul class="list-group">
+                <a class="list-group-item active" href="#"> My order history </a>
+                {% comment %} <a class="list-group-item" href="#"> Transactions </a>
+                <a class="list-group-item" href="#"> Return and refunds </a>
+                <a class="list-group-item" href="#">Settings </a>
+                <a class="list-group-item" href="#"> My Selling Items </a>
+                <a class="list-group-item" href="#"> Received orders </a> {% endcomment %}
+            </ul>
+            <br>
+            <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Log out</span> </a> 
+            <!--   SIDEBAR .//END   -->
+        </aside>
+        <main class="col-md-9">
+                {% if not orders %}
+                    <h2 class="text-center">Your Haven't Order Any Book Yet</h2>
+                    <br>
+                    <div class="text-center pb-1">
+                        <a href="{% url 'store' %}" class="btn btn-primary">Go Shopping Right Now</a>
+                    </div>
+                {% else %}
+                    {% for order in orders %}
+                        <article class="card">
+                            <article class="filter-group">
+                                <header class="card-header">
+                                    <a href="#" data-toggle="collapse" data-target="#collapse_{{order.order_number}}" aria-expanded="true" class="">
+                                        <strong class="d-inline-block mr-3">Order: #{{ order.order_number }}</strong>
+                                        <span>Order Date: {{ order.created_at }}</span>
+                                        <i class="icon-control fa fa-chevron-down"></i>
+                                    </a>
+                                </header>
+                                <div class="filter-content collapse hide" id="collapse_{{order.order_number}}" style="">
+                                    <div class="card-body">
+                                        <div class="row"> 
+                                            <div class="col-md-8">
+                                                <h6 class="text-muted">Delivery to</h6>
+                                                <p>{{ order.full_name }}<br>  
+                                                Phone {{ order.phone }} Email: {{ order.email }} <br>
+                                                Location: {{ order.full_address }}, {{ order.city }}, {{ order.state }}<br> 
+                                                Country: {{ order.country }}<br>
+                                                Note: {{ order.order_note }}
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h6 class="text-muted">Payment</h6>
+                                                <span>Method: {{ order.payment.payment_method }}</span>
+                                                <p>Tax: ${{ order.tax }} <br>
+                                                <span class="b">Total:  ${{ order.order_total }} </span>
+                                                </p>
+                                            </div>
+                                        </div> <!-- row.// -->
+                                    </div> <!-- card-body .// -->
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            {% for orders_product in orders_products %}
+                                                {% if orders_product.order.order_number == order.order_number %}
+                                                    <tr>
+                                                        <td width="65">
+                                                            <img src="{{ orders_product.product.images.url }}" class="img-xs border">
+                                                        </td>
+                                                        <td> 
+                                                            <p class="title mb-0">{{ orders_product.product.product_name }} </p>
+                                                            <var class="price text-muted">${{ orders_product.product.price }}</var>
+                                                        </td>
+                                                        <td> Category <br> {{ orders_product.product.category.category_name }} </td>
+                                                        <td> Quantity <br> {{ orders_product.quantity }} </td>
+                                                        <td width="250"> <a href="{{ orders_product.product.get_url }}" class="btn btn-light"> Details </a> </td>
+                                                    </tr>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </table>
+                                    </div> <!-- table-responsive .end// -->
+                                </div>
+                            </article>
+                        </article> <!-- order-group.// --> 
+                    {% endfor %}
+                {% endif %}
+                
+           
+        </main>
+    </div> <!-- row.// -->
+    </div>
+    
+    
+    </section>
+    <!-- ========================= SECTION CONTENT END// ========================= -->
+    
+{% endblock content %}
