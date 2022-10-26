@@ -19,6 +19,7 @@ from orders.models import Order, OrderProduct
 # Create your views here.
 
 
+# Handle Register
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
