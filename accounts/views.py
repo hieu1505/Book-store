@@ -60,7 +60,7 @@ def register(request):
     }
     return render(request, 'accounts/register.html', context)
 
-
+# Handle Login
 def login(request):
     if request.method == "POST":
         email = request.POST["email"]
