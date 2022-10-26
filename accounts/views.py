@@ -133,14 +133,14 @@ def login(request):
             return redirect('login')
     return render(request, 'accounts/login.html')
 
-
+# Handle Logout
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
     messages.success(request, "You are logged out.")
     return redirect("login")
 
-
+# Active Email
 def activate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
