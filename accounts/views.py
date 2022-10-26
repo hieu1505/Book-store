@@ -19,6 +19,7 @@ from orders.models import Order, OrderProduct
 # Create your views here.
 
 
+# Handle Register
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -59,7 +60,7 @@ def register(request):
     }
     return render(request, 'accounts/register.html', context)
 
-
+# Handle Login
 def login(request):
     if request.method == "POST":
         email = request.POST["email"]
@@ -132,14 +133,14 @@ def login(request):
             return redirect('login')
     return render(request, 'accounts/login.html')
 
-
+# Handle Logout
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
     messages.success(request, "You are logged out.")
     return redirect("login")
 
-
+# Active Email
 def activate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
