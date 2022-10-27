@@ -125,7 +125,7 @@ def login(request):
                     return redirect(nextPage)
                 
             except:
-                return redirect('dashboard')
+                return redirect('home')
             
         else:
             messages.error(request, "Invalid login information")
