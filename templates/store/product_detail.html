@@ -3,7 +3,7 @@
 {% block content %}
 <section class="section-content padding-y bg">
     <div class="container">
-
+        <!-- comment -->
         <!-- ============================ COMPONENT 1 ================================= -->
         <div class="card">
             <div class="row no-gutters">
@@ -17,7 +17,7 @@
                 </aside>
                 <main class="col-md-6 border-left">
                     <form action="{% url 'add_cart' single_product.id %}" method="POST">
-                        {% csrf_token %} 
+                        {% csrf_token %}
                         <article class="content-body">
 
                             <h2 class="title">{{ single_product.product_name }}</h2>
@@ -40,43 +40,46 @@
                                     <select name="color" class="form-control" required>
                                         <option value="" disabled selected>Select</option>
                                         {% for i in single_product.variation_set.colors %}
-                                            <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
+                                        <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst
+                                            }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                             </div> <!-- row.// -->
-                             <div class="row">
+                            <div class="row">
                                 <div class="item-option-select">
                                     <h6>Select Size</h6>
                                     <select name="size" class="form-control" required>
                                         <option value="" disabled selected>Select</option>
                                         {% for i in single_product.variation_set.sizes %}
-                                            <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
+                                        <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst
+                                            }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
-                            </div> <!-- row.// -->  {% endcomment %}
+                            </div> <!-- row.// --> {% endcomment %}
                             <div class="row">
                                 <div class="item-option-select">
                                     <h6>Choose Type</h6>
                                     <select name="type" class="form-control" required>
                                         <option value="" disabled selected>Select</option>
                                         {% for i in single_product.variation_set.types %}
-                                            <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
+                                        <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst
+                                            }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                             </div> <!-- row.// -->
                             <hr>
 
-                            {% if single_product.stock <= 0 %}
-                                <h5 class="text-danger">Out of Stock </h5>
-                            {% else %}
-                                
-                                <button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span><i class="fas fa-shopping-cart"></i> </button>
-                                
-                            {% endif %}
-                                
+                            {% if single_product.stock <= 0 %} <h5 class="text-danger">Out of Stock </h5>
+                                {% else %}
+
+                                <button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span><i
+                                        class="fas fa-shopping-cart"></i> </button>
+
+                                {% endif %}
+
                         </article> <!-- product-info-aside .// -->
                     </form>
                 </main> <!-- col.// -->
