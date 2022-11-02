@@ -41,7 +41,7 @@ def store(request, category_slug=None):
 def product_detail(request, category_slug, product_slug):
     try:
         single_product = Product.objects.get(
-            category__slug=category_slug, slug=product_slug)
+            category__slug=category_slug, slug=product_slug) #Get Book
         in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(
             request), product=single_product).exists()
 
