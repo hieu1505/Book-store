@@ -170,7 +170,7 @@ def dashboard(request):
     }
     return render(request, 'accounts/dashboard.html', context)
 
-
+# Handle forgot password
 def forgotPassword(request):
     if request.method == 'POST':
         email = request.POST['email']
