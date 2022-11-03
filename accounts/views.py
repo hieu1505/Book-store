@@ -200,7 +200,7 @@ def forgotPassword(request):
             return redirect('forgotPassword')
     return render(request, 'accounts/forgotPassword.html')
 
-
+# reset password validate
 def resetpassword_validate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
