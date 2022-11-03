@@ -19,6 +19,7 @@ from orders.models import Order, OrderProduct
 # Create your views here.
 
 
+# Handle Register
 def register(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
@@ -59,7 +60,7 @@ def register(request):
     }
     return render(request, 'accounts/register.html', context)
 
-
+# Handle Login
 def login(request):
     if request.method == "POST":
         email = request.POST["email"]
@@ -125,21 +126,21 @@ def login(request):
                     return redirect(nextPage)
                 
             except:
-                return redirect('dashboard')
+                return redirect('home')
             
         else:
             messages.error(request, "Invalid login information")
             return redirect('login')
     return render(request, 'accounts/login.html')
 
-
+# Handle Logout
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
     messages.success(request, "You are logged out.")
     return redirect("login")
 
-
+# Active Email
 def activate(request, uidb64, token):
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
@@ -169,7 +170,7 @@ def dashboard(request):
     }
     return render(request, 'accounts/dashboard.html', context)
 
-
+# Handle forgot password
 def forgotPassword(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -186,6 +187,7 @@ def forgotPassword(request):
                 'token': default_token_generator.make_token(user),
             })
 
+            # Email Authentication
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
