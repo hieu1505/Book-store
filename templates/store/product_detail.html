@@ -67,21 +67,19 @@
                                     <select name="type" class="form-control" required>
                                         <option value="" disabled selected>Select</option>
                                         {% for i in single_product.variation_set.types %}
-                                        <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst
-                                            }}</option>
+                                        <option value="{{ i.variation_value | lower }}">{{ i.variation_value | capfirst }}</option>
                                         {% endfor %}
                                     </select>
                                 </div>
                             </div> <!-- row.// -->
                             <hr>
 
-                            {% if single_product.stock <= 0 %} <h5 class="text-danger">Out of Stock </h5>
-                                {% else %}
-
-                                <button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span><i
-                                        class="fas fa-shopping-cart"></i> </button>
-
-                                {% endif %}
+                            {% if single_product.stock <= 0 %} 
+                                <h5 class="text-danger">Out of Stock </h5>
+                            {% else %}
+                                {% comment %} <button type="submit" class="btn  btn-primary"> <span class="text">Add to cart</span><i
+                                class="fas fa-shopping-cart"></i> </button> {% endcomment %}
+                            {% endif %}
 
                         </article> <!-- product-info-aside .// -->
                     </form>
