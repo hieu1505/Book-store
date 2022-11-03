@@ -37,7 +37,7 @@ def store(request, category_slug=None):
     }
     return render(request, 'store/store.html', context)
 
-
+#Get Detail Book
 def product_detail(request, category_slug, product_slug):
     try:
         single_product = Product.objects.get(
