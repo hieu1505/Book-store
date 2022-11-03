@@ -170,7 +170,7 @@ def dashboard(request):
     }
     return render(request, 'accounts/dashboard.html', context)
 
-
+# Handle forgot password
 def forgotPassword(request):
     if request.method == 'POST':
         email = request.POST['email']
@@ -187,6 +187,7 @@ def forgotPassword(request):
                 'token': default_token_generator.make_token(user),
             })
 
+            # Email Authentication
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
