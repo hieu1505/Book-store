@@ -75,15 +75,15 @@
                             <div class="widget-header">
                                 <small class="title text-muted">Welcome {{ user.last_name }} {{ user.first_name }}!</small>
                                 <div>
-                                    {% comment %} <a href="{% url 'dashboard' %}">Profile</a> <span class="dark-transp"> | </span> {% endcomment %}
+                                    <a href="{% url 'dashboard' %}">Profile</a> <span class="dark-transp"> | </span>
                                     <a href="{% url 'logout' %}"> Logout</a>
                                 </div>
                             </div>
                         {% endif %}
-                        {% comment %} <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
+                        <a href="{% url 'cart' %}" class="widget-header pl-3 ml-3">
                             <div class="icon icon-sm rounded-circle border"><i class="fa fa-shopping-cart"></i></div>
                             <span class="badge badge-pill badge-danger notify">{{ cart_count }}</span>
-                        </a> {% endcomment %}
+                        </a>
                     </div> <!-- widgets-wrap.// -->
                 </div> <!-- col.// -->
             </div> <!-- row.// -->
