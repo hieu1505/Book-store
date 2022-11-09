@@ -167,7 +167,7 @@ def remove_cart_item(request, product_id, cart_item_id):
 def cart(request, total=0, quantity=0, cart_items=None):
     try:
         tax = 0
-        grand_total = 0 
+        grand_total = 0 # total price of all products in the cart
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)
         else:
