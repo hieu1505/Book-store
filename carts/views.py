@@ -154,7 +154,7 @@ def remove_cart(request, product_id,cart_item_id):
         pass
     return redirect('cart')
 
-
+# Handle remove item from cart 
 def remove_cart_item(request, product_id, cart_item_id):
     product = get_object_or_404(Product, id=product_id)
     if request.user.is_authenticated:
