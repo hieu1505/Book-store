@@ -87,6 +87,7 @@ def add_cart(request, product_id):
                     pass
 
         try:
+            # Handle show cart
             # get the cart using the cart_id present in the session
             cart = Cart.objects.get(cart_id=_cart_id(request))
         except Cart.DoesNotExist:
