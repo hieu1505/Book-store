@@ -169,7 +169,7 @@ def remove_cart_item(request, product_id, cart_item_id):
 def cart(request, total=0, quantity=0, cart_items=None):
     try:
         tax = 0
-        grand_total = 0 
+        grand_total = 0 # total price of all products in the cart
         if request.user.is_authenticated:
             cart_items = CartItem.objects.filter(user=request.user, is_active=True)
         else:
@@ -179,8 +179,8 @@ def cart(request, total=0, quantity=0, cart_items=None):
             # Handle total price after update
             total += (cart_item.product.price*cart_item.quantity)
             quantity += cart_item.quantity
-        tax = (settings.TAX*total)/100
-        grand_total = total+tax
+        tax = (settings.TAX*total)/100 #tax caculation
+        grand_total = total+tax #total tax
     except ObjectDoesNotExist:
         pass
 
@@ -189,7 +189,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
         'quantity': quantity,
         'cart_items': cart_items,
         'tax': tax,
-        'grand_total': grand_total,
+        'grand_total': grand_total, #product price and tax
     }
 
     return render(request, 'store/cart.html', context)
