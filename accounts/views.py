@@ -162,7 +162,7 @@ def activate(request, uidb64, token):
 def dashboard(request):
     current_user = request.user
 
-    orders = Order.objects.filter(user=current_user, is_ordered = True)
+    orders = Order.objects.filter(user=current_user, is_ordered = True).order_by('-order_number')
     orders_products = OrderProduct.objects.filter(user=current_user, ordered=True)
     context = {
         'orders': orders,
