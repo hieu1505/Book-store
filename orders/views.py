@@ -154,7 +154,7 @@ def order_complete(request):
         return render(request,'orders/order_complete.html',context)
     except (Payment.DoesNotExist,Order.DoesNotExist):
         return redirect('store')
-
+# feat 60 1
 
 
 
