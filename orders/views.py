@@ -155,6 +155,7 @@ def order_complete(request):
     except (Payment.DoesNotExist,Order.DoesNotExist):
         return redirect('store')
 # feat 60 1
+# feat 60 2
 
 
 
