@@ -198,6 +198,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
 # If login => get all item and send to check out page
 # If not login => send to login page
 # After login => get all item from the cart outside + item from user's cart
+# Not login
 @login_required(login_url='login')
 def checkout(request,total=0, quantity=0, cart_items=None):
     try:
