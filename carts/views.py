@@ -194,6 +194,10 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
     return render(request, 'store/cart.html', context)
 
+# Handle item in cart
+# If login => get all item and send to check out page
+# If not login => send to login page
+# After login => get all item from the cart outside + item from user's cart
 @login_required(login_url='login')
 def checkout(request,total=0, quantity=0, cart_items=None):
     try:
