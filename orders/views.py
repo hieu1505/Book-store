@@ -72,6 +72,7 @@ def payments(request):
     return JsonResponse(data)
 
 #  Handle empty cart -> return to shop
+# Handle grand total by calculate tax and price
 def place_order(request, total=0, quantity=0,):
     current_user = request.user
 
