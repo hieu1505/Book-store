@@ -93,6 +93,7 @@ def place_order(request, total=0, quantity=0,):
     if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
+            # Get all user information
             # Store all the billing information inside Order table
             data = Order()
             data.user = current_user
