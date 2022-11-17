@@ -19,12 +19,12 @@ def payments(request):
         payment_method = body['payment_method'],
         amount_paid = order.order_total,
     )
-    payment.save()
+    payment.save() #create payment
     order.payment = payment
-    order.is_ordered = True
+    order.is_ordered = True #modify status order
     order.save()
 
-    # move the cart item to order product table
+    # move the cart item to order product table 
     cart_items = CartItem.objects.filter(user=request.user)
     for item in cart_items:
         orderproduct = OrderProduct()
@@ -41,17 +41,17 @@ def payments(request):
         product_variation = cart_item.variations.all()
         orderproduct = OrderProduct.objects.get(id=orderproduct.id)
         orderproduct.variation.set(product_variation)
-        orderproduct.save()
+        orderproduct.save()  #create OrderProduct
 
 
 
-        # reduce quantity of the sold product
+        # reduce quantity of the sold product 
         product = Product.objects.get(id=item.product_id)
-        product.stock -= item.quantity
+        product.stock -= item.quantity  #set stock
         product.save()
 
     # clear cart 
-    CartItem.objects.filter(user=request.user).delete()
+    CartItem.objects.filter(user=request.user).delete()  #delete cart
     # send order email to customer
     mail_subject = "Thank you for your order!"
     message = render_to_string('orders/order_recieved_email.html', {
@@ -59,9 +59,9 @@ def payments(request):
         'order':order,
     })
 
-    to_email = request.user.email
+    to_email = request.user.email #set to user
     send_email = EmailMessage(mail_subject, message, to=[to_email])
-    send_email.send()
+    send_email.send() #send email
     
     # send order number and id payment back to send data method via js
     data = {
