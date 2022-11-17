@@ -47,7 +47,7 @@ def payments(request):
 
         # reduce quantity of the sold product 
         product = Product.objects.get(id=item.product_id)
-        product.stock -= item.quantity
+        product.stock -= item.quantity  #set stock
         product.save()
 
     # clear cart 
