@@ -24,7 +24,7 @@ def payments(request):
     order.is_ordered = True #modify status order
     order.save()
 
-    # move the cart item to order product table
+    # move the cart item to order product table 
     cart_items = CartItem.objects.filter(user=request.user)
     for item in cart_items:
         orderproduct = OrderProduct()
@@ -41,11 +41,11 @@ def payments(request):
         product_variation = cart_item.variations.all()
         orderproduct = OrderProduct.objects.get(id=orderproduct.id)
         orderproduct.variation.set(product_variation)
-        orderproduct.save()
+        orderproduct.save()  #create OrderProduct
 
 
 
-        # reduce quantity of the sold product
+        # reduce quantity of the sold product 
         product = Product.objects.get(id=item.product_id)
         product.stock -= item.quantity
         product.save()
