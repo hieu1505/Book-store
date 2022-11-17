@@ -59,9 +59,9 @@ def payments(request):
         'order':order,
     })
 
-    to_email = request.user.email
+    to_email = request.user.email #set to user
     send_email = EmailMessage(mail_subject, message, to=[to_email])
-    send_email.send()
+    send_email.send() #send email
     
     # send order number and id payment back to send data method via js
     data = {
