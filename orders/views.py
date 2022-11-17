@@ -71,7 +71,8 @@ def payments(request):
 
     return JsonResponse(data)
 
-
+#  Handle empty cart -> return to shop
+# Handle grand total by calculate tax and price
 def place_order(request, total=0, quantity=0,):
     current_user = request.user
 
@@ -92,6 +93,7 @@ def place_order(request, total=0, quantity=0,):
     if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
+            # Get all user information
             # Store all the billing information inside Order table
             data = Order()
             data.user = current_user
@@ -110,6 +112,7 @@ def place_order(request, total=0, quantity=0,):
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()
 
+            # Generate order includes user information,billing information
             # generate order number
             yr = int(datetime.date.today().strftime('%Y'))
             dt = int(datetime.date.today().strftime('%d'))
@@ -128,6 +131,7 @@ def place_order(request, total=0, quantity=0,):
                 'tax':tax,
                 'grand_total':grand_total,
             }
+            # return all order information to payment success
             return render(request,'orders/payments.html',context)
         else:
             return redirect('checkout')
