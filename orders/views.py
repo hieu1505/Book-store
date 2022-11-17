@@ -21,7 +21,7 @@ def payments(request):
     )
     payment.save() #create payment
     order.payment = payment
-    order.is_ordered = True
+    order.is_ordered = True #modify status order
     order.save()
 
     # move the cart item to order product table
